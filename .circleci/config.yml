@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/usr/src/milano
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run: echo "Installing packages"
+      - run: npm install
+      - run: echo "Running tests"
+      - run: CI=true npm test

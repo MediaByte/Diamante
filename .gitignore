@@ -3,3 +3,5 @@ built
 /build
 *.tmp
 *.DS_Store
+*.pem
+*.sh

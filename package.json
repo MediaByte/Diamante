@@ -1,6 +1,6 @@
 {
-  "name": "Milano",
-  "version": "2.0.0",
+  "name": "diamante",
+  "version": "2.1.2",
   "main": "server.js",
   "repository": "",
   "scripts": {
@@ -29,6 +29,6 @@
     "pg": "^7.12.1",
     "socket.io": "^2.2.0"
   },
-  "description": "Energy Monitoring Solution",
+  "description": "Boilerplate full stack web application",
   "devDependencies": {}
 }

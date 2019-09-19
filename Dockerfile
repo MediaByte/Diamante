@@ -1,6 +1,6 @@
-FROM node:11
+FROM node:12
 
-WORKDIR /usr/src/milano
+WORKDIR /usr/src/diamante
 
 COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json

@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import bodyparser from 'body-parser'
 import io from 'socket.io';
 import knex from 'knex';
@@ -23,7 +22,7 @@ app.post('/sample', (req: express.Request, res: express.Response) => dataProcess
 app.get('/*', (req: express.Request, res: express.Response) => res.sendFile(path.join(__dirname, '../dashboard/build', 'index.html')));
 
 
-app.listen(port, () => console.log(`Ready to accept connections`));
+app.listen(port, () => console.log(`Waiting for connections`));
 
 
 

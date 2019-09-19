@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/usr/src/milano
+    working_directory: ~/usr/src/diamante
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     steps:
       - checkout
       - run: echo "Installing packages"

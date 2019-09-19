@@ -1,36 +1,36 @@
 version: '3.6'
 services:
   backend:
-    container_name: Milano
+    container_name: Diamante
     build: ./
     command: npm start
-    working_dir: /usr/src/milano
+    working_dir: /usr/src/diamante
     ports:
      - 5000:5000 #Development
      - 80:5000 #Production
     environment:
       PORT: 5000
-      POSTGRES_URI: postgres://milano:king_crimson@postgres:5432/milano
-      POSTGRES_DB: EN_MON
+      POSTGRES_URI: postgres://diamante:king_crimson@postgres:5432/diamante
+      POSTGRES_DB: diamante
       REDIS_URI: redis://redis:6379
     links:
       - postgres
       - redis
     volumes:
-      - ./package.json:/usr/src/milano/package.json
-      - ./package-lock.json:/usr/src/milano/package-lock.json
-      - ./built/server.js:/usr/src/milano/built/server.js
-      - ./built/controllers:/usr/src/milano/built/controllers
-      - ./dashboard:/usr/src/milano/dashboard
+      - ./package.json:/usr/src/diamante/package.json
+      - ./package-lock.json:/usr/src/diamante/package-lock.json
+      - ./built/server.js:/usr/src/diamante/built/server.js
+      - ./built/controllers:/usr/src/diamante/built/controllers
+      - ./dashboard:/usr/src/diamante/dashboard
   postgres:
     container_name: PostgreSQL
     build: ./postgres
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: milano
+      POSTGRES_USER: diamante
       POSTGRES_PASSWORD: king_crimson
-      POSTGRES_DB: EN_MON
+      POSTGRES_DB: diamante
       POSTGRES_HOST: postgres
   redis:
     container_name: Redis

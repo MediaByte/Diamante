@@ -4,7 +4,8 @@ WORKDIR /usr/src/diamante
 
 COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json
-COPY ./built ./built
+COPY ./dist ./dist
+COPY ./config ./config
 COPY ./dashboard/build ./dashboard/build
 
 RUN npm install

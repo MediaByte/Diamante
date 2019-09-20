@@ -1,7 +1,6 @@
 node_modules
-built
-/build
+dist
 *.tmp
 *.DS_Store
-*.pem
 *.sh
+.vscode

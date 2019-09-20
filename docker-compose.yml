@@ -1,4 +1,5 @@
 version: '3.6'
+
 services:
   backend:
     container_name: Diamante
@@ -6,11 +7,12 @@ services:
     command: npm start
     working_dir: /usr/src/diamante
     ports:
-    #  - 5000:5000 #Development
+     - 5000:5000 #Development
      - 80:5000 #Production
+     - 443:5000 #Production
     environment:
       PORT: 5000
-      POSTGRES_URI: postgres://diamante:king_crimson@postgres:5432/diamante
+      POSTGRES_URI: postgres://diamante:king_crimson@postgres:5432/olympus
       POSTGRES_DB: diamante
       REDIS_URI: redis://redis:6379
     links:
@@ -19,9 +21,10 @@ services:
     volumes:
       - ./package.json:/usr/src/diamante/package.json
       - ./package-lock.json:/usr/src/diamante/package-lock.json
-      - ./built/server.js:/usr/src/diamante/built/server.js
-      - ./built/controllers:/usr/src/diamante/built/controllers
+      - ./dist:/usr/src/diamante/dist
+      - ./config:/usr/src/diamante/config
       - ./dashboard:/usr/src/diamante/dashboard
+
   postgres:
     container_name: PostgreSQL
     build: ./postgres
@@ -30,10 +33,11 @@ services:
     environment:
       POSTGRES_USER: diamante
       POSTGRES_PASSWORD: king_crimson
-      POSTGRES_DB: diamante
+      POSTGRES_DB: olympus
       POSTGRES_HOST: postgres
     volumes:
-      - /srv/diamante/pg_data:/var/lib/postgresql/data
+      - ./pg_data:/var/lib/postgresql/data
+
   redis:
     container_name: Redis
     build: ./redis

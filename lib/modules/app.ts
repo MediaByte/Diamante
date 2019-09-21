@@ -1,14 +1,17 @@
-// Third party NPM Packages
-import express, { Application } from "express";
+// NPM Packages
+import express from "express";
 import bodyParser from "body-parser";
 import helmet from 'helmet';
 import cors from 'cors';
 
-// RESTful API Routes
-import { Routes } from "./routes/rest.api.routes";
+// Routes
+import { Routes } from "../routes/rest.api.routes";
+
+// Type definitions
+import { DIAMANTE_APPLICATION } from '../types/type.definitions';
 
 class App {
-    public diamante: Application = express();
+    public diamante: DIAMANTE_APPLICATION = express();
     public masterRoutes: Routes = new Routes();
 
     constructor() {
@@ -23,6 +26,7 @@ class App {
         this.diamante.use(express.static(__dirname + '../../dashboard/build'));
     };
 
-}
+
+};
 
 export default new App().diamante;

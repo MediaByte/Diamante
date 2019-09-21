@@ -1,22 +1,21 @@
-// Node standard library modules
-import { createServer, Server } from 'https';
-import * as fs from 'fs';
+// NodeJS standard library modules
+import { Server } from 'https';
 
-// Custom Modules
-import app from './app';
+// Custom Mmdules
+import app from './modules/app';
+import Socket from './modules/socket'
 
-interface httpsConfig {
-    key: Buffer,
-    cert: Buffer
-};
+// Type declarations
+import { DIAMANTE_HTTPS_PROTOCOL } from './types/type.definitions';
+import { SOCKET_COMMUNICATION } from './types/type.definitions';
 
-const httpsOptions: httpsConfig = {
-    key: fs.readFileSync('./config/key.pem'),
-    cert: fs.readFileSync('./config/cert.pem')
-};
+// Constants
+import { httpsOptions } from './constants/server.constants';
 
-const server: Server = createServer(httpsOptions, app);
+const httpsServer: DIAMANTE_HTTPS_PROTOCOL = new Server(httpsOptions, app);
+const socket: SOCKET_COMMUNICATION = new Socket(httpsServer);
 
-server.listen(process.env.PORT, () => console.log("DIAMANTE IS NOW RUNNING"));
+socket.io.on("connection", (stream : any) => socket.socketCommunication(stream));
 
+httpsServer.listen(process.env.PORT, () => console.log("DIAMANTE IS NOW RUNNING"));
 

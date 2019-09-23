@@ -10,9 +10,7 @@ The documentation below will get you up and running on your host machine for dev
 |-- .circleci
 |   |-- config.yml
 |
-|
 |-- lib
-|
 |   |-- client
 |       |-- public
 |           |-- favicon.ico
@@ -38,7 +36,6 @@ The documentation below will get you up and running on your host machine for dev
 |       |-- README.md
 |       |-- tsconfig.json
 |
-|
 |   |-- server
 |       |-- constants
 |           |-- server.constants.ts
@@ -54,7 +51,6 @@ The documentation below will get you up and running on your host machine for dev
 |           |-- type.definitions.ts
 |       |-- server.ts
 |
-|
 |-- postgres
 |   |-- tables
 |       |-- login.sql
@@ -62,11 +58,9 @@ The documentation below will get you up and running on your host machine for dev
 |   |-- deploy_schemas.sql
 |   |-- Dockerfile
 |
-|
 |-- redis
 |   |-- Dockerfile
 |   |-- redis.conf
-|
 |
 |-- .gitignore
 |-- docker-compose.yml
@@ -100,7 +94,7 @@ $ tsc -v
 ### Install the project dependencies
 Next, run the following command in your terminal:
 ```
-$ cd diamante && npm install && tsc && cd lib/client && npm install && npm run build && cd .. && cd ..
+$ cd diamante && npm run build
 ```
 This command will install all the necessary project dependencies.
 

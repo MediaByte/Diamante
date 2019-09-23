@@ -6,7 +6,7 @@ COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json
 COPY ./dist ./dist
 COPY ./config ./config
-COPY ./dashboard/build ./dashboard/build
+COPY ./lib/client/build ./dashboard/build
 
 RUN npm install
 

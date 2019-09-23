@@ -1,4 +1,5 @@
 node_modules
+pg_data
 dist
 *.tmp
 *.DS_Store

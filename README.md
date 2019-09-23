@@ -151,7 +151,7 @@ $ npm init && npm install socket.io-client && touch client.js
 ```
 
 Head over to your code editor of choice and copy and paste the following script in client.js:
-```
+```js
 var io = require('socket.io-client');
 
 var socket = io.connect('https://localhost', {rejectUnauthorized: false});

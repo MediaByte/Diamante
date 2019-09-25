@@ -2,26 +2,31 @@
 import SocketIO from 'socket.io';
 
 // Type definitions
-import { DIAMANTE_SECURE_SOCKET, DIAMANTE_HTTPS_PROTOCOL } from '../types/type.definitions';
+import { SocketServer, HTTPSServer } from '../types/diamante.d';
 
 // Socket Routes
 import { SocketHandler } from "../routes/socket.routes";
 
 export default class Socket {
-    public socketRoutes: SocketHandler = new SocketHandler();
-    public io!: DIAMANTE_SECURE_SOCKET;
-    private readonly server: DIAMANTE_HTTPS_PROTOCOL;
+    private socketRoutes: SocketHandler = new SocketHandler();
+    private readonly server: HTTPSServer;
+    public io!: SocketServer;
 
-    constructor(server: DIAMANTE_HTTPS_PROTOCOL) {
+    constructor(server: HTTPSServer) {
         this.server = server;
         this.initialize();
+        this.handleRoutes()
     };
+
+    private handleRoutes() {
+        this.io.on("connection", (stream: any) => this.socketCommunication(stream));
+    }
 
     private initialize(): void {
         this.io = SocketIO(this.server);
     };
 
-    public socketCommunication(socket_data: any): void {
+    private socketCommunication(socket_data: any): void {
         this.socketRoutes.socketStream(socket_data);
     };
 

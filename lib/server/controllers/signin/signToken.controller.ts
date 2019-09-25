@@ -1,8 +1,15 @@
 import * as jwt from "jsonwebtoken";
 
-const signToken = (username: any) => {
+// import fs from 'fs';
+
+const signToken = (username: string) => {
     const jwtPayload = { username };
-    return jwt.sign(jwtPayload, 'JWT_SECRET_KEY', { expiresIn: '2 days' });
+    const JWT_SECRET_KEY = "fs.readFileSync('../../../../config/server.key', 'utf8')";
+    const signOptions = {
+        expiresIn: '12h'
+    };
+
+    return jwt.sign(jwtPayload, JWT_SECRET_KEY, signOptions);
 };
 
 export default signToken;

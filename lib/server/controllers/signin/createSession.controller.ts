@@ -2,13 +2,13 @@
 import signToken from './signToken.controller';
 import setToken from './setToken.controller';
 
-const createSession = (user: any, redisClient: any) => {
+import { Redis, IUser } from '../../types/diamante.d';
+
+const createSession = (user: IUser, redisClient: Redis) => {
     const { email, id } = user;
     const token = signToken(email);
     return setToken(token, id, redisClient)
-        .then(() => {
-            return { success: 'true', userId: id, token, user };
-        })
+        .then(() => { return { success: 'true', userId: id, token } })
         .catch(console.log);
 };
 

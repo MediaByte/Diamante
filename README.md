@@ -10,7 +10,6 @@ The documentation below will get you up and running on your host machine for dev
 |-- .circleci
 |   |-- config.yml
 |
-|
 |-- lib
 |
 |   |-- client
@@ -38,14 +37,24 @@ The documentation below will get you up and running on your host machine for dev
 |       |-- README.md
 |       |-- tsconfig.json
 |
-|
 |   |-- server
 |       |-- constants
 |           |-- server.constants.ts
 |       |-- controllers
-|           |-- signin.controllers.ts
+|           |-- auth
+|               |-- authenticate.controller.ts
+|           |-- register
+|               |-- register.controller.ts
+|           |-- signin
+|               |-- createSession.controller.ts
+|               |-- getAuthTokenId.controller.ts
+|               |-- setToken.controller.ts
+|               |-- signin.controller.ts
+|               |-- signToken.controller.ts
 |       |-- modules
 |           |-- app.ts
+|           |-- db.ts
+|           |-- redis.ts
 |           |-- socket.ts
 |       |-- routes
 |           |-- rest.api.routes.ts
@@ -54,19 +63,12 @@ The documentation below will get you up and running on your host machine for dev
 |           |-- type.definitions.ts
 |       |-- server.ts
 |
-|
 |-- postgres
 |   |-- tables
 |       |-- login.sql
 |       |-- users.sql
 |   |-- deploy_schemas.sql
 |   |-- Dockerfile
-|
-|
-|-- redis
-|   |-- Dockerfile
-|   |-- redis.conf
-|
 |
 |-- .gitignore
 |-- docker-compose.yml

@@ -8,10 +8,10 @@ import cors from 'cors';
 import { Routes } from "../routes/rest.api.routes";
 
 // Type definitions
-import { DIAMANTE_APPLICATION } from '../types/type.definitions';
+import { DiamanteApp } from '../types/diamante';
 
 class App {
-    public diamante: DIAMANTE_APPLICATION = express();
+    public diamante: DiamanteApp = express();
     public masterRoutes: Routes = new Routes();
 
     constructor() {

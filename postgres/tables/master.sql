@@ -1,0 +1,16 @@
+BEGIN TRANSACTION;
+
+CREATE TABLE master (
+    id serial PRIMARY KEY,
+    event_date TIMESTAMP NOT NULL,
+    ch0 FLOAT NOT NULL,
+    ch1 FLOAT NOT NULL,
+    ch2 FLOAT NOT NULL,
+    ch3 FLOAT NOT NULL,
+    ch4 FLOAT NOT NULL,
+    ch5 FLOAT NOT NULL,
+    ch6 FLOAT NOT NULL,
+    ch7 FLOAT NOT NULL
+);
+
+COMMIT;

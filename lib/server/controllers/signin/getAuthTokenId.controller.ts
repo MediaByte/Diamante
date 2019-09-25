@@ -1,14 +1,8 @@
 
+import { Redis } from '../../types/diamante.d';
 
-
-const getAuthTokenId = (req: any, res: any, redisClient: any) => {
-    const { authorization } = req.headers;
-    return redisClient.get(authorization, (err: any, reply: any) => {
-        if (err || !reply) {
-            return res.status(401).send('Unauthorized');
-        }
-        return res.json({ id: reply });
-    });
-};
+const getAuthTokenId = (authorized: string, redisClient: Redis, cb: any) =>
+    redisClient.get(authorized, (err: any, reply: any) =>
+        (err || !reply) ? cb({ success: false, payload: 'Unauthorized' }) : cb({ success: true, payload: reply }));
 
 export default getAuthTokenId;

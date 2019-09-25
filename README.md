@@ -11,7 +11,6 @@ The documentation below will get you up and running on your host machine for dev
 |   |-- config.yml
 |
 |-- lib
-|
 |   |-- client
 |       |-- public
 |           |-- favicon.ico
@@ -102,7 +101,7 @@ $ tsc -v
 ### Install the project dependencies
 Next, run the following command in your terminal:
 ```
-$ cd diamante && npm install && tsc && cd lib/client && npm install && npm run build && cd .. && cd ..
+$ cd diamante && npm run build
 ```
 This command will install all the necessary project dependencies.
 
@@ -159,7 +158,7 @@ $ npm init && npm install socket.io-client && touch client.js
 ```
 
 Head over to your code editor of choice and copy and paste the following script in client.js:
-```
+```js
 var io = require('socket.io-client');
 
 var socket = io.connect('https://localhost', {rejectUnauthorized: false});

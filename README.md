@@ -10,6 +10,14 @@ The documentation below will get you up and running on your host machine for dev
 |-- .circleci
 |   |-- config.yml
 |
+|-- keys
+|   |-- auth
+|       |-- private.key
+|       |-- public.key
+|   |-- server
+|       |-- server.cert
+|       |-- server.key
+|
 |-- lib
 |   |-- client
 |       |-- public

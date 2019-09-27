@@ -19,7 +19,7 @@ services:
       - ./package.json:/usr/src/diamante/package.json
       - ./package-lock.json:/usr/src/diamante/package-lock.json
       - ./dist:/usr/src/diamante/dist
-      - ./config:/usr/src/diamante/config
+      - ./keys:/usr/src/diamante/keys
       - ./lib/client/build:/usr/src/diamante/build
 
   postgres:

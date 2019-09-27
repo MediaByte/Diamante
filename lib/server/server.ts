@@ -8,7 +8,6 @@ import Socket from './modules/socket'
 // Type declarations
 import { HTTPSServer } from './types/diamante';
 
-
 // Constants
 import { httpsOptions } from './constants/server.constants';
 

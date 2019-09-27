@@ -1,4 +1,3 @@
-
 // Type definitions
 import { RequestHandler, ResponseHandler, NextHandler, Redis } from '../../types/diamante';
 

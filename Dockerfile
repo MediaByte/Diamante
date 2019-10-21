@@ -3,11 +3,11 @@ FROM node:12
 WORKDIR /usr/src/diamante
 
 COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
-COPY ./dist ./dist
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./src/server ./server
+COPY ./src/client/ ./client
 COPY ./keys ./keys
-COPY ./lib/client/build ./build
 
-RUN npm install
+RUN npm install && npm install --prefix client && npm run build --prefix client
 
 CMD ["/bin/bash"]

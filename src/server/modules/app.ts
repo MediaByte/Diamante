@@ -23,7 +23,7 @@ class App {
         this.diamante.use(helmet());
         this.diamante.use(cors());
         this.diamante.use(bodyParser.json());
-        this.diamante.use(express.static(__dirname + '../../dashboard/build'));
+        this.diamante.use(express.static(__dirname + '../../../client/build'));
     };
 
 

@@ -5,7 +5,7 @@ import Knex from 'knex';
 import * as bcrypt from 'bcrypt';
 
 //Type definitions
-import { IPostgresConfig, ILoginData, IUserData } from '../types/diamante.d';
+import { IPostgresConfig, ILoginData, IUserData } from '../types/diamante';
 
 class Postgres {
     private readonly connectionString: string | undefined;

@@ -2,7 +2,7 @@
 import SocketIO from 'socket.io';
 
 // Type definitions
-import { SocketServer, HTTPSServer } from '../types/diamante.d';
+import { SocketServer, HTTPSServer } from '../types/diamante';
 
 // Socket Routes
 import { SocketHandler } from "../routes/socket.routes";

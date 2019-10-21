@@ -1,5 +1,6 @@
 // NodeJS standard library modules
-import { Server } from 'https';
+import * as https from 'https';
+import * as http from 'http';
 // NPM packages
 import { Application, Request, Response, NextFunction } from "express";
 import SocketIO from 'socket.io';
@@ -26,7 +27,8 @@ export interface IUserData {
 }
 
 // Type definitions for HTTPS
-export type HTTPSServer = Server;
+export type HTTPSServer = https.Server;
+export type HTTPServer = http.Server;
 export type DiamanteApp = Application;
 export type RequestHandler = Request;
 export type ResponseHandler = Response;

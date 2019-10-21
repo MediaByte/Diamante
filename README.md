@@ -4,6 +4,11 @@ Diamante is a boilerplate full stack web application developed by Mario Martin. 
 ## Getting Started
 The documentation below will get you up and running on your host machine for development and deployment. See the deployment section below for notes on how to deploy this project into production.
 
+The simplest way to get start is by entering the following command in your terminal:
+```
+docker-compose up --build
+```
+
 ## Files and Folder structure
 ```
 .
@@ -18,7 +23,7 @@ The documentation below will get you up and running on your host machine for dev
 |       |-- server.cert
 |       |-- server.key
 |
-|-- lib
+|-- src
 |   |-- client
 |       |-- public
 |           |-- favicon.ico
@@ -100,18 +105,6 @@ or https:
 ```
 git clone https://github.com/MediaByte/diamante.git
 ```
-### Make sure you have typescript installed as a global
-Before you continue, make sure you have [Typescript](https://www.npmjs.com/package/typescript) installed as a global npm package. You can check this by running the following command:
-```
-$ tsc -v
-```
-
-### Install the project dependencies
-Next, run the following command in your terminal:
-```
-$ cd diamante && npm run build
-```
-This command will install all the necessary project dependencies.
 
 ### SSL for development
 Diamante uses OpenSSL as its certificate authority for secure & encrypted communication.  You are free to use whatever certificate authority you like, but if you're strapped with time and need to start developing, use this quick helper to get a certificate that will work (make sure to run this in the diamante directory):
@@ -120,6 +113,7 @@ $ cd config
 $ openssl req -nodes -new -x509 -keyout server.key -out server.cert
 ```
 During this process, you'll be prompted to answer a few questions. If you are building this for development, you can safely ignore all the prompts and just hit the return key to get your keys.
+
 
 ### Install Docker and Docker-Compose
 Next, you will need Docker and docker-compose installed in your development machine.  Follow these instructions [to get started with Docker on MacOS](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/)
@@ -186,8 +180,26 @@ socket.on('connect', (stream) => {
 ```
 $ node client.js
 ```
-You should see some standard output in your terminal representing a connection established and packets being sent to the diamante server every 5 seconds.
+Here is a python script for your convenience
 
+```py
+import socketio
+import json
+import time
+
+sio = socketio.Client(logger=True, engineio_logger=True)
+sio.connect('https://example.com')
+
+
+def main():
+    while True:
+        output = {"Hello": "World"}
+        sio.emit("debug", output)
+
+
+if __name__ == '__main__':
+    main()
+```
 
 ## Deployment
 To deploy this project, you will need docker and docker-compose installed on your host machine. Assuming you are running linux, follow these instructions [to get started with Docker](https://docs.docker.com/install/linux/docker-ce/debian/)
@@ -201,6 +213,105 @@ With Docker installed on your deployment machine, run the following command in y
 ```
 $ docker-compose start
 ```
+
+### SSL for deployment
+Diamante uses [Lets Encrypt](https://letsencrypt.org) as its certificate authority for secure & encrypted communication. Follow these instructions for usage on AWS:
+
+If you have not used certbot (or LetsEncrypt.org), then you'll want to install this on your ubuntu instance on AWS:
+```sh
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get install certbot
+```
+
+Next run the interactive command line tool by entering the following command into your terminal:
+
+```sh
+$ sudo certbot certonly --manual
+```
+You should see the following output:
+
+```
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator manual, Installer None
+Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c' to cancel):
+```
+You'll want to enter the custom domain associated to this server.  For this project enter the following:
+```
+Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c' to cancel): domain.com
+```
+This should bring you to the next step:
+```
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for domain.com
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NOTE: The IP of this machine will be publicly logged as having requested this
+certificate. If you're running certbot in manual mode on a machine that is not
+your server, please ensure you're okay with that.
+
+Are you OK with your IP being logged?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: y
+```
+You'll press Y and enter to move on to the next step:
+
+```
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Create a file containing just this data:
+
+RDL2NK7FV39c9b9eMcMIXFHWWrIZaYoxqj4.rszZFDfLNTl7EtqwmCAnBQ
+
+And make it available on your web server at this URL:
+
+http://domain.com/.well-known/acme-challenge/RDL2NK7FV39cMIXq1_XKB0OFHWoxqj4
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Press Enter to Continue
+```
+
+IMPORTANT: Before you press ENTER - You'll want to head over to the source code:
+
+```
+|-- lib
+|   |-- server
+|       |-- routes
+|           |-- rest.api.routes.ts
+```
+and modify the line with the information given above from certbot cli from this:
+```ts
+  app.get("INSERT_LETS_ENCRYPT_CHALLENGE_HERE", (req: RequestHandler, res: ResponseHandler) => res.send("INSERT_RESPONSE_HERE"));
+```
+to this: 
+```ts
+  app.get("/.well-known/acme-challenge/RDL2NK7FV39cMIXq1_XKB0OFHWoxqj4", (req: RequestHandler, res: ResponseHandler): void =>
+    res.send("RDL2NK7FV39c9b9eMcMIXFHWWrIZaYoxqj4.rszZFDfLNTl7EtqwmCAnBQ"));
+```
+
+
+Finally, press enter to continue and if all goes well you should see something like the following in your terminal:
+
+```
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/domain.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/domain.com/privkey.pem
+   Your cert will expire on 2020-01-10. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+References to this method can be found [here](https://itnext.io/node-express-letsencrypt-generate-a-free-ssl-certificate-and-run-an-https-server-in-5-minutes-a730fbe528ca)
 
 
 ## Author

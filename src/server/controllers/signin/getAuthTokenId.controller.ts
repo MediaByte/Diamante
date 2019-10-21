@@ -1,5 +1,5 @@
 
-import { Redis } from '../../types/diamante.d';
+import { Redis } from '../../types/diamante';
 
 const getAuthTokenId = (authorized: string, redisClient: Redis, cb: any) =>
     redisClient.get(authorized, (err: any, reply: any) =>

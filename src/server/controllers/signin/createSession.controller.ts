@@ -2,7 +2,7 @@
 import signToken from './signToken.controller';
 import setToken from './setToken.controller';
 
-import { Redis, IUser } from '../../types/diamante.d';
+import { Redis, IUser } from '../../types/diamante';
 
 const createSession = (user: IUser, redisClient: Redis) => {
     const { email, id } = user;

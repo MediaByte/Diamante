@@ -167,7 +167,7 @@ var socket = io.connect('https://localhost', {rejectUnauthorized: false});
 
 socket.on('connect', (stream) => {
     console.log('Connection Established');
-    socket.emit('master', {data: "Hello World"});
+    socket.emit('debug', {data: "Hello World"});
     setInterval(() => {
         socket.emit('master', {data: "Hello World"});
         console.log("Message Sent");

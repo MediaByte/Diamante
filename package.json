@@ -5,6 +5,7 @@
   "main": "server.js",
   "repository": "",
   "scripts": {
+    "build": "tsc",
     "dev": "nodemon build/server",
     "start": "node build/server",
     "test": "jest"

@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Installing packages"
+      - run: npm install -g jest
       - run: npm install
       - run: echo "Running tests"
       - run: CI=true npm test

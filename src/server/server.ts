@@ -20,3 +20,4 @@ new Socket(httpsServer);
 httpsServer.listen(process.env.HTTPS_PORT, () => console.log("DIAMANTE IS NOW RUNNING"));
 httpServer.listen(process.env.HTTP_PORT);
 
+export { httpsServer, httpServer };

@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": "",
   "scripts": {
-    "start": "tsnd server/server.ts",
+    "start": "nodemon build/server",
     "test": "jest"
   },
   "keywords": [
@@ -14,30 +14,29 @@
   "author": "Mario Martin",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "helmet": "^3.21.0",
+    "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.19.5",
-    "npm": "^6.11.3",
-    "pg": "^7.12.1",
+    "knex": "^0.20.4",
+    "npm": "^6.13.3",
+    "pg": "^7.14.0",
     "redis": "^2.8.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.3.0"
   },
   "description": "Boilerplate full stack web application",
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/body-parser": "^1.17.1",
     "@types/cors": "^2.8.6",
-    "@types/express": "^4.17.1",
-    "@types/helmet": "0.0.43",
-    "@types/jsonwebtoken": "^8.3.4",
-    "@types/node": "^11.13.20",
-    "@types/redis": "^2.8.13",
-    "@types/socket.io": "^2.1.2",
-    "ts-node-dev": "^1.0.0-pre.43",
-    "typescript": "^3.6.4"
+    "@types/express": "^4.17.2",
+    "@types/helmet": "0.0.45",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/node": "^12.12.17",
+    "@types/redis": "^2.8.14",
+    "@types/socket.io": "^2.1.4",
+    "nodemon": "^2.0.1"
   }
 }

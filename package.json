@@ -5,7 +5,8 @@
   "main": "server.js",
   "repository": "",
   "scripts": {
-    "start": "nodemon build/server",
+    "dev": "nodemon build/server",
+    "start": "node build/server",
     "test": "jest"
   },
   "keywords": [

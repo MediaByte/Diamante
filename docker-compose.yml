@@ -1,10 +1,11 @@
 version: '3.6'
 services:
+
   backend:
     container_name: diamante
     build: ./
     restart: always
-    command: npm start
+    command: npm run dev
     working_dir: /usr/src/diamante
     ports:
       - 443:5000
@@ -16,10 +17,10 @@ services:
       - redis
     volumes:
       - ./package.json:/usr/src/diamante/package.json
-      - ./tsconfig.json:/usr/src/diamante/tsconfig.json
-      - ./src/server:/usr/src/diamante/server
-      - ./keys:/usr/src/diamante/keys
       - ./src/client/:/usr/src/diamante/client
+      - ./build:/usr/src/diamante/build
+      - ./keys:/usr/src/diamante/keys
+
   postgres:
     container_name: postgres
     build: ./postgres
@@ -30,6 +31,7 @@ services:
       - pg.env
     volumes:
       - ./pg_data:/var/lib/postgresql/data
+
   redis:
     container_name: redis
     image: redis
